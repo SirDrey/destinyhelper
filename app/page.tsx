@@ -22,7 +22,9 @@ export default function Home() {
       <div className="bg-primary-foreground p-4 rounded-lg md:col-span-2 lg:col-span-2">
         <AppAreachart />
       </div>
-      <div className="bg-primary-foreground p-4 rounded-lg"><Todolist/></div>
+      <div className="bg-primary-foreground p-4 rounded-lg">
+        <Todolist />
+      </div>
     </div>
   );
 }
