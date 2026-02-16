@@ -15,16 +15,11 @@ import {
 } from "@/components/ui/hover-card";
 import { Progress } from "@/components/ui/progress";
 import { BadgeCheck, Candy, Citrus, Shield } from "lucide-react";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import EditUser from "@/components/ui/EditUser";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import AppLinechart from "@/components/ui/AppLinechart";
 
 const page = () => {
   return (
@@ -109,7 +104,15 @@ const page = () => {
             </div>
           </div>
           <div className="bg-primary-foreground p-4 rounded-lg">
-            <h1>User Information</h1>
+            <div className="flex items-center justify-between">
+              <h1>User Information</h1>
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button>Edit User</Button>
+                </SheetTrigger>
+                <EditUser />
+              </Sheet>
+            </div>
             <div className="space-y-4 mt-4">
               <div className="flex flex-col gap-2 mb-8">
                 <p className="text-sm text-muted-foreground">
@@ -148,8 +151,24 @@ const page = () => {
         </div>
 
         <div className="w-full lg:w-2/3 space-y-6">
-          <div className="bg-primary-foreground p-4 rounded-lg">User Card</div>
-          <div className="bg-primary-foreground p-4 rounded-lg">Chart</div>
+          <div className="bg-primary-foreground p-4 rounded-lg">
+            <div className="flex items-center gap-12">
+              <Avatar className="size-12">
+                <AvatarImage src="https://avatars.githubusercontent.com/u/1486366" />
+                <AvatarFallback>SD</AvatarFallback>
+              </Avatar>
+              <h1 className="text-xl font-semibold">Sir Drey</h1>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit
+              ab ratione aliquid quia praesentium itaque cum voluptate facilis,
+              ducimus blanditiis quaerat sit assumenda fugiat magni, dignissimos
+              amet, vel rerum quisquam?
+            </p>
+          </div>
+          <div className="bg-primary-foreground p-4 rounded-lg">
+            <h1 className="text-xl font-semibold">User Activity</h1>
+            <AppLinechart/></div>
         </div>
       </div>
     </div>
