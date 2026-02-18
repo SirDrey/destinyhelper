@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import EditUser from "@/components/ui/EditUser";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import AppLinechart from "@/components/ui/AppLinechart";
+import { SectionCards } from "@/components/ui/SectionCards";
 
 const page = () => {
   return (
@@ -39,6 +40,9 @@ const page = () => {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
+      <div className="my-4">
+        <SectionCards />
+      </div>
       <div className="mt-4 flex flex-col lg:flex-row gap-4">
         <div className="w-full lg:w-1/3 space-y-6">
           <div className="bg-primary-foreground p-4 rounded-lg">
@@ -168,7 +172,8 @@ const page = () => {
           </div>
           <div className="bg-primary-foreground p-4 rounded-lg">
             <h1 className="text-xl font-semibold">User Activity</h1>
-            <AppLinechart/></div>
+            <AppLinechart />
+          </div>
         </div>
       </div>
     </div>

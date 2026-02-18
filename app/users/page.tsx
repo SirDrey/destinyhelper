@@ -1,7 +1,17 @@
-import React from "react";
+import Posts from "@/components/ui/Posts";
 
-const page = () => {
-  return <div>page</div>;
+interface HomeProps {
+  searchParams: { [key: string]: string | undefined };
+}
+
+const Page = async ({ searchParams }: HomeProps) => {
+  const resolvedSearchParams = await searchParams;
+  console.log(resolvedSearchParams);
+  return (
+    <div>
+      <Posts resolvedSearchParams={resolvedSearchParams} />
+    </div>
+  );
 };
 
-export default page;
+export default Page;

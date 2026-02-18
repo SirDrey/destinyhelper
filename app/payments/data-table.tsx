@@ -34,8 +34,6 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
   });
 
-  console.log(table);
-
   return (
     <div className="overflow-hidden rounded-md border">
       <Table>
