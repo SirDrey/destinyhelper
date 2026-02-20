@@ -8,9 +8,15 @@ import Todolist from "@/components/ui/Todolist";
 export default function Home() {
   return (
     <div>
-      <div className="mb-4">
-        <SectionCards />
-      </div>
+       <div className="flex flex-1 flex-col">
+          <div className="@container/main flex flex-1 flex-col gap-2">
+            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+              <SectionCards />
+            </div>
+          </div>
+        </div>
+
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-primary-foreground p-4 rounded-lg md:col-span-2 lg:col-span-2">
           <AppbarChart />
