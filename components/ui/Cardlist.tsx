@@ -9,8 +9,9 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "./scroll-area";
 
-const popularContent = [
+const Ratings = [
   {
     title: "Javascript Tutorial",
     id: 1,
@@ -53,7 +54,7 @@ const popularContent = [
   },
 ];
 
-const latestTransactions = [
+const Testimonies = [
   {
     title: "Subscription Renewal",
     id: 1,
@@ -97,37 +98,39 @@ const latestTransactions = [
 ];
 
 const Cardlist = ({ title }: { title: string }) => {
-  const list =
-    title === "Popular Content" ? popularContent : latestTransactions;
+  const list = title === "Ratings" ? Ratings : Testimonies;
   return (
     <div>
       <h1 className="text-lg font-medium mb-6">{title}</h1>
-      <div className="flex flex-col gap-2">
-        {list.map((item) => (
-          <Card
-            key={item.id}
-            className="flex-row items-center justify-between gap-4 p-4"
-          >
-            <div className="w-12 h-12 rounded-sm relative overflow-hidden">
-              <Image
-                src={item.image}
-                alt={item.title}
-                fill
-                className="object-cover"
-              />
-            </div>
-            <CardContent className="p-0 ">
-              <CardTitle className="text-sm font-medium">
-                {item.title}
-              </CardTitle>
-              <Badge variant="secondary">{item.badge}</Badge>
-            </CardContent>
-            <CardFooter>
-              <p className="P-0">{item.count / 1000}k</p>
-            </CardFooter>
-          </Card>
-        ))}
-      </div>
+
+      <ScrollArea className="max-h-[600px] mt-4 overflow-y-auto p-6">
+        <div className="flex flex-col gap-2">
+          {list.map((item) => (
+            <Card
+              key={item.id}
+              className="flex-row items-center justify-between gap-4 p-4"
+            >
+              <div className="w-12 h-12 rounded-sm relative overflow-hidden">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <CardContent className="p-0 ">
+                <CardTitle className="text-sm font-medium">
+                  {item.title}
+                </CardTitle>
+                <Badge variant="secondary">{item.badge}</Badge>
+              </CardContent>
+              <CardFooter>
+                <p className="P-0">{item.count / 1000}k</p>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+      </ScrollArea>
     </div>
   );
 };

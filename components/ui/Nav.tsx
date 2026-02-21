@@ -24,7 +24,7 @@ const Nav = () => {
       <SidebarTrigger />
 
       <div className="flex items-center gap-4">
-        <Link href="/">Dashboard</Link>
+        <Link href="/">Destiny Helper</Link>
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -59,18 +59,18 @@ const Nav = () => {
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuItem>
                 <User className="h-[1.2rem] width-[i.2rem] mr-2" />
-                Profile
+                <Link href="/users/user">Profile</Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Settings className="h-[1.2rem] width-[i.2rem] mr-2" />
-                settings
+                <Link href="/notifications">Notifications</Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuItem variant="destructive">
                 <LogOut className="h-[1.2rem] width-[i.2rem] mr-2" />
-                logout
+                <Link href="/signout">Signout</Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
           </DropdownMenuContent>

@@ -1,6 +1,5 @@
 "use client";
 
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -20,7 +19,7 @@ const Todolist = () => {
 
   return (
     <div>
-      <h1 className="text-lg font-medium mb-6">Todo list</h1>
+      <h1 className="text-lg font-medium mb-6">Task list</h1>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button className="w-full">
@@ -39,12 +38,10 @@ const Todolist = () => {
           />
         </PopoverContent>
       </Popover>
-
-      <ScrollArea className="max-h-[800px] mt-4 overflow-y-auto">
+      <div className="p-6">
         <div className="flex flex-col gap-4">
           <Card className="p-4">
             <div className="flex items-center gap-4">
-              <Checkbox id="item1" />
               <label htmlFor="item1">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut,
               </label>
@@ -52,7 +49,6 @@ const Todolist = () => {
           </Card>
           <Card className="p-4">
             <div className="flex items-center gap-4">
-              <Checkbox id="item1" />
               <label htmlFor="item1">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut,
               </label>
@@ -60,7 +56,6 @@ const Todolist = () => {
           </Card>
           <Card className="p-4">
             <div className="flex items-center gap-4">
-              <Checkbox id="item1" checked />
               <label htmlFor="item1">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut,
               </label>
@@ -68,7 +63,6 @@ const Todolist = () => {
           </Card>
           <Card className="p-4">
             <div className="flex items-center gap-4">
-              <Checkbox id="item1" checked />
               <label htmlFor="item1">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut,
               </label>
@@ -76,7 +70,6 @@ const Todolist = () => {
           </Card>
           <Card className="p-4">
             <div className="flex items-center gap-4">
-              <Checkbox id="item1" />
               <label htmlFor="item1">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut,
               </label>
@@ -84,7 +77,6 @@ const Todolist = () => {
           </Card>
           <Card className="p-4">
             <div className="flex items-center gap-4">
-              <Checkbox id="item1" checked />
               <label htmlFor="item1">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut,
               </label>
@@ -92,30 +84,13 @@ const Todolist = () => {
           </Card>
           <Card className="p-4">
             <div className="flex items-center gap-4">
-              <Checkbox id="item1" checked />
-              <label htmlFor="item1">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut,
-              </label>
-            </div>
-          </Card>
-          <Card className="p-4">
-            <div className="flex items-center gap-4">
-              <Checkbox id="item1" />
-              <label htmlFor="item1">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut,
-              </label>
-            </div>
-          </Card>
-          <Card className="p-4">
-            <div className="flex items-center gap-4">
-              <Checkbox id="item1" />
               <label htmlFor="item1">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut,
               </label>
             </div>
           </Card>
         </div>
-      </ScrollArea>
+      </div>
     </div>
   );
 };

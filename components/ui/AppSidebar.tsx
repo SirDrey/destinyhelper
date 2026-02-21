@@ -2,11 +2,15 @@ import {
   Calendar,
   ChevronDown,
   ChevronUp,
+  Contact,
   Home,
   Inbox,
+  LayoutDashboard,
+  ListTodoIcon,
   Plus,
   Projector,
   Search,
+  SearchAlertIcon,
   Settings,
   User2,
 } from "lucide-react";
@@ -42,33 +46,37 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import {
+  IconArrowRoundaboutLeft,
+  IconArrowRoundaboutRight,
+} from "@tabler/icons-react";
 
 // Menu items.
 const items = [
   {
     title: "Home",
-    url: "#",
+    url: "/",
     icon: Home,
   },
   {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
+    title: "Dashboard",
+    url: "/users/user",
+    icon: LayoutDashboard,
   },
   {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
+    title: "About",
+    url: "/about",
+    icon: SearchAlertIcon,
   },
   {
-    title: "Search",
-    url: "#",
-    icon: Search,
+    title: "Contact",
+    url: "/contact",
+    icon: Contact,
   },
   {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
+    title: "Tasks",
+    url: "/tasks",
+    icon: ListTodoIcon,
   },
 ];
 
@@ -91,7 +99,7 @@ const AppSidebar = () => {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupLabel>Menu</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
@@ -112,16 +120,16 @@ const AppSidebar = () => {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>projects</SidebarGroupLabel>
+          <SidebarGroupLabel>Projects</SidebarGroupLabel>
           <SidebarGroupAction>
-            <Plus /> <span className="sr-only">Add Project</span>
+            <Plus /> <span className="sr-only">Upcoming projects</span>
           </SidebarGroupAction>
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link href="/#">
-                    <Projector /> see all projects
+                    <Projector /> Upcoming projects
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -140,7 +148,7 @@ const AppSidebar = () => {
           <SidebarGroup>
             <SidebarGroupLabel asChild>
               <CollapsibleTrigger>
-                collapsible group
+                Performance
                 <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
               </CollapsibleTrigger>
             </SidebarGroupLabel>
@@ -151,14 +159,14 @@ const AppSidebar = () => {
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild>
                       <Link href="/#">
-                        <Projector /> see all collapse
+                        <Projector /> Check performance
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild>
                       <Link href="/#">
-                        <Plus /> add collapse
+                        <Plus /> more
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -168,57 +176,11 @@ const AppSidebar = () => {
           </SidebarGroup>
         </Collapsible>
 
-        <SidebarGroup>
-          <SidebarGroupLabel>nested items</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="/#">
-                    <Projector /> see all nested items
-                  </Link>
-                </SidebarMenuButton>
-
-                <SidebarMenuSub>
-                  <SidebarMenuSubItem>
-                    <SidebarMenuSubButton asChild>
-                      <Link href="/#">
-                        <Plus /> add nested projects
-                      </Link>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                  <SidebarMenuSubItem>
-                    <SidebarMenuSubButton asChild>
-                      <Link href="/#">
-                        <Plus /> 2nd nested projects
-                      </Link>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                </SidebarMenuSub>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+       
+       
       </SidebarContent>
 
-      <SidebarFooter>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuButton>
-                  <User2 /> King Drey <ChevronUp className="ml-auto" />
-                </SidebarMenuButton>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem>account</DropdownMenuItem>
-                <DropdownMenuItem>setting</DropdownMenuItem>
-                <DropdownMenuItem>signout</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
+      
     </Sidebar>
   );
 };
