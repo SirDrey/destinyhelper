@@ -47,11 +47,13 @@ const Nav = () => {
           </DropdownMenuContent>
         </DropdownMenu>
 
+        <Link href="/auth/signin">signin</Link>
+
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Avatar>
               <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarFallback>DH</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent sideOffset={10}>

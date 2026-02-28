@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Calendar,
   ChevronDown,
@@ -59,8 +61,8 @@ const items = [
     icon: Home,
   },
   {
-    title: "Dashboard",
-    url: "/users/user",
+    title: "Donate",
+    url: "/donate",
     icon: LayoutDashboard,
   },
   {

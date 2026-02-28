@@ -1,3 +1,5 @@
+"use client";
+
 import { Post } from "@/lib/api";
 import {
   Card,

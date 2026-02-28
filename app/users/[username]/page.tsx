@@ -199,7 +199,7 @@ const page = () => {
             </div>
 
             <div className="bg-primary-foreground p-6 rounded-xl shadow-sm border">
-              <h1 className="text-xl font-semibold mb-4">User Activity</h1>
+              <h1 className="text-xl font-semibold mb-4">Analytics</h1>
               <AppLinechart />
             </div>
           </div>
