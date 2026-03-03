@@ -47,7 +47,7 @@ const Nav = () => {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <Link href="/auth/signin">signin</Link>
+        <Link href="/signin">signin</Link>
 
         <DropdownMenu>
           <DropdownMenuTrigger>

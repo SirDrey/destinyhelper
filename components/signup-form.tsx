@@ -1,4 +1,6 @@
-import { cn } from "@/lib/utils";
+"use client";
+
+/*import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Field,
@@ -6,15 +8,196 @@ import {
   FieldGroup,
   FieldLabel,
   FieldSeparator,
-} from "@/components/ui/field";
+} from "@/components/ui/field";*/
 import { Input } from "@/components/ui/input";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { passwordSchema } from "@/lib/validation";
+import { authClient } from "@/lib/auth-client";
+import { toast } from "sonner";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import Link from "next/link";
+import { PasswordInput } from "./ui/PasswordInput";
+import { LoadingButton } from "./ui/LoadingButton";
+
+const signUpSchema = z
+  .object({
+    name: z.string().min(1, { message: "Name is required" }),
+    email: z.email({ message: "Please enter a valid email" }),
+    password: passwordSchema,
+    passwordConfirmation: z
+      .string()
+      .min(1, { message: "Please confirm password" }),
+  })
+  .refine((data) => data.password === data.passwordConfirmation, {
+    message: "Passwords do not match",
+    path: ["passwordConfirmation"],
+  });
+
+type SignUpValues = z.infer<typeof signUpSchema>;
 
 export function SignupForm({
   className,
   ...props
 }: React.ComponentProps<"form">) {
+  const [error, setError] = useState<string | null>(null);
+
+  const router = useRouter();
+
+  const form = useForm<SignUpValues>({
+    resolver: zodResolver(signUpSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      passwordConfirmation: "",
+    },
+  });
+
+  async function onSubmit({ email, password, name }: SignUpValues) {
+    setError(null);
+
+    const { error } = await authClient.signUp.email({
+      email,
+      password,
+      name,
+      callbackURL: "/email-verified",
+    });
+
+    if (error) {
+      setError(error.message || "Something went wrong");
+    } else {
+      toast.success("Signed up successfully");
+      router.push("/dashboard");
+    }
+  }
+
+  const loading = form.formState.isSubmitting;
+
   return (
-    <form className={cn("flex flex-col gap-6", className)} {...props}>
+    <Card className="w-full max-w-md">
+      <CardHeader>
+        <CardTitle className="text-lg md:text-xl">Sign Up</CardTitle>
+        <CardDescription className="text-xs md:text-sm">
+          Enter your information to create an account
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Destiny Helper" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder="your@email.com"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <PasswordInput
+                      autoComplete="new-password"
+                      placeholder="Password"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="passwordConfirmation"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Confirm Password</FormLabel>
+                  <FormControl>
+                    <PasswordInput
+                      autoComplete="new-password"
+                      placeholder="Confirm password"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {error && (
+              <div role="alert" className="text-sm text-red-600">
+                {error}
+              </div>
+            )}
+
+            <LoadingButton type="submit" className="w-full" loading={loading}>
+              Create an account
+            </LoadingButton>
+          </form>
+        </Form>
+      </CardContent>
+      <CardFooter>
+        <div className="flex w-full justify-center border-t pt-4">
+          <p className="text-muted-foreground text-center text-xs">
+            Already have an account?{" "}
+            <Link href="/sign-in" className="underline">
+              Sign in
+            </Link>
+          </p>
+        </div>
+      </CardFooter>
+    </Card>
+  );
+}
+
+/*<form className={cn("flex flex-col gap-6", className)} {...props}>
       <FieldGroup>
         <div className="flex flex-col items-center gap-1 text-center">
           <h1 className="text-2xl font-bold">Create your account</h1>
@@ -65,6 +248,4 @@ export function SignupForm({
           </FieldDescription>
         </Field>
       </FieldGroup>
-    </form>
-  );
-}
+    </form>*/
