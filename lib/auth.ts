@@ -10,7 +10,7 @@ export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
-  socialProviders: {
+  /*socialProviders: /{
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
@@ -19,7 +19,7 @@ export const auth = betterAuth({
       clientId: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
     },
-  },
+  },*/
   emailAndPassword: {
     enabled: true,
     async sendResetPassword({ user, url }) {
@@ -83,18 +83,23 @@ export const auth = betterAuth({
       // -----------------------------
       // 🚨 Rate limiting for login
       // -----------------------------
-      /*if (ctx.path === "/sign-in/email") {
-      const ip =
-        ctx.headers?.get("x-forwarded-for") ?? "unknown";
+      if (ctx.path === "/sign-in/email") {
+ 
+  const forwarded = ctx.headers?.get("x-forwarded-for");
+  const ip = forwarded?.split(",")[0].trim() ?? "unknown";
 
-      const { success } = await limiter.limit(ip);
+  const email = ctx.body?.email?.toLowerCase() ?? "unknown";
+
+  const key = `${ip}:${email}`;
+
+  const { success } = await limiter.limit(key);
 
       if (!success) {
         throw new APIError("TOO_MANY_REQUESTS", {
           message: "Too many login attempts.",
         });
       }
-    }*/
+    }
     }),
   },
 });

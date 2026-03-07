@@ -61,7 +61,7 @@ const Nav = () => {
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuItem>
                 <User className="h-[1.2rem] width-[i.2rem] mr-2" />
-                <Link href="/users/user">Profile</Link>
+                <Link href="/user">Profile</Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Settings className="h-[1.2rem] width-[i.2rem] mr-2" />

@@ -1,10 +1,11 @@
-import { GalleryVerticalEnd } from "lucide-react"
-
-import { LoginForm } from "@/components/login-form"
+import { SignInForm } from "@/components/signin-form";
+import { GalleryVerticalEnd } from "lucide-react";
 import { Metadata } from "next";
 
+
+
 export const metadata: Metadata = {
-  title: "Sign up",
+  title: "Sign in",
 };
 
 export default function LoginPage() {
@@ -21,7 +22,7 @@ export default function LoginPage() {
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
-            <LoginForm />
+            <SignInForm />
           </div>
         </div>
       </div>
@@ -35,3 +36,4 @@ export default function LoginPage() {
     </div>
   )
 }
+
