@@ -1,196 +1,211 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { UserAvatar } from "@/components/ui/UserAvatar";
-import { User } from "@/lib/auth";
-import { getServerSession } from "@/lib/get-session";
-import { format } from "date-fns";
-import { CalendarDaysIcon, MailIcon, ShieldIcon, UserIcon } from "lucide-react";
-import type { Metadata } from "next";
-import Link from "next/link";
-import { unauthorized } from "next/navigation";
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { ChartAreaInteractive } from "@/components/chart-area-interactive";
+import { DataTable } from "@/components/data-table";
+import { SectionCards } from "@/components/section-cards";
+import data from "./data";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import { Badge } from "@/components/ui/badge";
+import { BadgeCheck, Candy, Citrus, Shield } from "lucide-react";
+import { Sheet, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import EditUser from "@/components/ui/EditUser";
+import { Progress } from "@/components/ui/progress";
+import Cardlist from "@/components/ui/Cardlist";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import AppLinechart from "@/components/ui/AppLinechart";
+import { requireUser } from "@/lib/require-user";
 
-export const metadata: Metadata = {
-  title: "Dashboard",
-};
-
-export default async function DashboardPage() {
-  const session = await getServerSession();
-  const user = session?.user;
-
-  if (!user) unauthorized();
+const Dashboard = async () => {
+  const user = await requireUser();
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 py-12">
-      <div className="space-y-6">
-        <div className="space-y-2">
+    <div className="min-h-screen p-4">
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/profile">Profile</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/tasks">Tasks</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Destiny Helper</BreadcrumbLink>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+
+      <div className="flex flex-1 flex-col">
+        <div className="mt-5">
           <h1 className="text-2xl font-semibold">Dashboard</h1>
-          <p className="text-muted-foreground">
-            Welcome back! Here&apos;s your account overview.
-          </p>
         </div>
-        {!user.emailVerified && <EmailVerificationAlert />}
-        <ProfileInformation user={user} />
-      </div>
-    </main>
-  );
-}
+        <div className="@container/main flex flex-1 flex-col gap-6 py-6">
+          <SectionCards />
 
-interface ProfileInformationProps {
-  user: User;
-}
-
-function ProfileInformation({ user }: ProfileInformationProps) {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <UserIcon className="size-5" />
-          Profile Information
-        </CardTitle>
-        <CardDescription>
-          Your account details and current status
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
-          <div className="flex flex-col items-center gap-3">
-            <UserAvatar
-              name={user.name}
-              image={user.image}
-              className="size-32 sm:size-24"
-            />
-            {user.role && (
-              <Badge>
-                <ShieldIcon className="size-3" />
-                {user.role}
-              </Badge>
-            )}
+          <div className="px-4 lg:px-6">
+            <ChartAreaInteractive />
           </div>
 
-          <div className="flex-1 space-y-4">
-            <div>
-              <h3 className="text-2xl font-semibold">{user.name}</h3>
-              <p className="text-muted-foreground">{user.email}</p>
+          <DataTable data={data} />
+
+          {/* USER BADGES */}
+          <div className="bg-primary-foreground p-6 rounded-xl shadow-sm border">
+            <h1 className="text-xl font-semibold">User Badges</h1>
+
+            <div className="flex flex-wrap gap-4 mt-4">
+              <HoverCard>
+                <HoverCardTrigger>
+                  <BadgeCheck
+                    size={36}
+                    className="rounded-full bg-blue-500/30 border border-blue-500/50 p-2"
+                  />
+                </HoverCardTrigger>
+                <HoverCardContent>
+                  <h1 className="font-bold mb-2">Beginner</h1>
+                  <p className="text-sm text-muted-foreground">Level 1</p>
+                </HoverCardContent>
+              </HoverCard>
+
+              <HoverCard>
+                <HoverCardTrigger>
+                  <Shield
+                    size={36}
+                    className="rounded-full bg-green-500/30 border border-green-500/50 p-2"
+                  />
+                </HoverCardTrigger>
+                <HoverCardContent>
+                  <h1 className="font-bold mb-2">Advanced</h1>
+                  <p className="text-sm text-muted-foreground">Level 2</p>
+                </HoverCardContent>
+              </HoverCard>
+
+              <HoverCard>
+                <HoverCardTrigger>
+                  <Candy
+                    size={36}
+                    className="rounded-full bg-yellow-500/30 border border-yellow-500/50 p-2"
+                  />
+                </HoverCardTrigger>
+                <HoverCardContent>
+                  <h1 className="font-bold mb-2">Master</h1>
+                  <p className="text-sm text-muted-foreground">Level 3</p>
+                </HoverCardContent>
+              </HoverCard>
+
+              <HoverCard>
+                <HoverCardTrigger>
+                  <Citrus
+                    size={36}
+                    className="rounded-full bg-orange-500/30 border border-orange-500/50 p-2"
+                  />
+                </HoverCardTrigger>
+                <HoverCardContent>
+                  <h1 className="font-bold mb-2">Veteran</h1>
+                  <p className="text-sm text-muted-foreground">Level 4</p>
+                </HoverCardContent>
+              </HoverCard>
+            </div>
+          </div>
+
+          {/* PROFILE + TRANSACTIONS GRID */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* USER PROFILE */}
+            <div className="bg-primary-foreground p-6 rounded-xl shadow-sm border lg:col-span-1">
+              <div className="flex items-center justify-between">
+                <h1 className="text-xl font-semibold">User Information</h1>
+                <Sheet>
+                  <SheetTrigger asChild>
+                    <Button>Edit User</Button>
+                  </SheetTrigger>
+                  <EditUser />
+                </Sheet>
+              </div>
+
+              <div className="space-y-4 mt-6">
+                <div className="flex flex-col gap-2 mb-6">
+                  <p className="text-sm text-muted-foreground">
+                    Profile Completion
+                  </p>
+                  <Progress value={66} />
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="font-bold"></span>
+                  <span>Sir Drey</span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="font-bold">Email:</span>
+                  <span>SirDrey@gmail.com</span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="font-bold">Phone number:</span>
+                  <span>08105398413</span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="font-bold">Location:</span>
+                  <span>Ilorin, Nigeria</span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="font-bold">Level:</span>
+                  <Badge>Admin</Badge>
+                </div>
+
+                <p className="text-sm text-muted-foreground pt-2">
+                  Joined on 2021.03.04
+                </p>
+              </div>
             </div>
 
-            <div className="space-y-2">
-              <div className="text-muted-foreground flex items-center gap-2 text-sm">
-                <CalendarDaysIcon className="size-4" />
-                Member Since
+            {/* RECENT TRANSACTIONS */}
+            <div className="bg-primary-foreground p-6 rounded-xl shadow-sm border lg:col-span-2">
+              <Cardlist title="Testimonies" />
+            </div>
+          </div>
+
+          {/* USER BIO + ACTIVITY */}
+          <div className="space-y-6">
+            <div className="bg-primary-foreground p-6 rounded-xl shadow-sm border">
+              <div className="flex items-center gap-6">
+                <Avatar className="size-12">
+                  <AvatarImage src="https://avatars.githubusercontent.com/u/1486366" />
+                  <AvatarFallback>SD</AvatarFallback>
+                </Avatar>
+                <h1 className="text-xl font-semibold">Sir Drey</h1>
               </div>
-              <p className="font-medium">
-                {format(user.createdAt, "MMMM d, yyyy")}
+
+              <p className="text-sm text-muted-foreground mt-4">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Suscipit ab ratione aliquid quia praesentium itaque cum
+                voluptate facilis, ducimus blanditiis quaerat sit assumenda
+                fugiat magni, dignissimos amet, vel rerum quisquam?
               </p>
             </div>
+
+            <div className="bg-primary-foreground p-6 rounded-xl shadow-sm border">
+              <h1 className="text-xl font-semibold mb-4">Analytics</h1>
+              <AppLinechart />
+            </div>
           </div>
         </div>
-      </CardContent>
-    </Card>
-  );
-}
-
-function EmailVerificationAlert() {
-  return (
-    <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4 dark:border-yellow-800/50 dark:bg-yellow-950/30">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <MailIcon className="size-5 text-yellow-600 dark:text-yellow-400" />
-          <span className="text-yellow-800 dark:text-yellow-200">
-            Please verify your email address to access all features.
-          </span>
-        </div>
-        <Button size="sm" asChild>
-          <Link href="/verify-email">Verify Email</Link>
-        </Button>
       </div>
     </div>
   );
-}
+};
 
-/*
-import { SectionCards } from "@/components/ui/SectionCards";
-
-  <div>
-       <div className="flex flex-1 flex-col">
-          <div className="@container/main flex flex-1 flex-col gap-2">
-            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-              <SectionCards />
-            </div>
-          </div>
-        </div>
-
-        <SidebarMenuSub>
-                  <SidebarMenuSubItem>
-                    <SidebarMenuSubButton asChild>
-                      <Link href="/#">
-                        <Plus /> add nested projects
-                      </Link>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                  <SidebarMenuSubItem>
-                    <SidebarMenuSubButton asChild>
-                      <Link href="/#">
-                        <Plus /> 2nd nested projects
-                      </Link>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                </SidebarMenuSub>
-
-                 <SidebarGroup>
-          <SidebarGroupLabel>nested items</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="/#">
-                    <Projector /> see all nested items
-                  </Link>
-                </SidebarMenuButton>
-
-                <SidebarMenuSub>
-                  <SidebarMenuSubItem>
-                    <SidebarMenuSubButton asChild>
-                      <Link href="/#">
-                        <Plus /> add nested projects
-                      </Link>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                  <SidebarMenuSubItem>
-                    <SidebarMenuSubButton asChild>
-                      <Link href="/#">
-                        <Plus /> 2nd nested projects
-                      </Link>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                </SidebarMenuSub>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-
-
-        <SidebarFooter>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuButton>
-                  <User2 /> King Drey <ChevronUp className="ml-auto" />
-                </SidebarMenuButton>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem>account</DropdownMenuItem>
-                <DropdownMenuItem>setting</DropdownMenuItem>
-                <DropdownMenuItem>signout</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
-*/
+export default Dashboard;

@@ -86,7 +86,7 @@ export function SignupForm({
       setError(error.message || "Something went wrong");
     } else {
       toast.success("Signed up successfully");
-      router.push("/dashboard");
+      router.push("/profile");
     }
   }
 

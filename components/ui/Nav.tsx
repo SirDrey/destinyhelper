@@ -15,12 +15,14 @@ import {
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { SignOut } from "./Signout";
+import { User as UserType } from "better-auth";
 
-const Nav = () => {
-  const { theme, setTheme } = useTheme();
+const Nav = ({ user }: { user: UserType | undefined }) => {
+  const { setTheme } = useTheme();
 
   return (
-    <nav className="p-4 flex item-center justify-between sticky top-0 bg-background z-10">
+    <nav className="p-4 flex items-center justify-between sticky top-0 bg-background z-10">
       <SidebarTrigger />
 
       <div className="flex items-center gap-4">
@@ -46,37 +48,54 @@ const Nav = () => {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+        {!user ? (
+          <Link href="/signin">signin</Link>
+        ) : (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Avatar>
+                <AvatarImage src={user.image ?? ""} />
+                <AvatarFallback>
+                  {(user.name ?? "User")
+                    ?.trim()
+                    .split(" ")
+                    .filter(Boolean)
+                    .slice(0, 2)
+                    .map((word: string) => word[0])
+                    .join("")
+                    .toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent sideOffset={10}>
+              <DropdownMenuGroup>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuItem asChild>
+                  <Link href="/profile" className="flex items-center">
+                    <User className="h-[1.2rem] w-[1.2rem] mr-2" />
+                    Profile
+                  </Link>
+                </DropdownMenuItem>
 
-        <Link href="/signin">signin</Link>
-
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>DH</AvatarFallback>
-            </Avatar>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent sideOffset={10}>
-            <DropdownMenuGroup>
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuItem>
-                <User className="h-[1.2rem] width-[i.2rem] mr-2" />
-                <Link href="/user">Profile</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Settings className="h-[1.2rem] width-[i.2rem] mr-2" />
-                <Link href="/notifications">Notifications</Link>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuGroup>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem variant="destructive">
-                <LogOut className="h-[1.2rem] width-[i.2rem] mr-2" />
-                <Link href="/signout">Signout</Link>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+                <DropdownMenuItem asChild>
+                  <Link href="/notifications" className="flex items-center">
+                    <Settings className="h-[1.2rem] w-[1.2rem] mr-2" />
+                    Notifications
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuGroup>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <SignOut>
+                    <LogOut className="h-[1.2rem] w-[1.2rem] mr-2" />
+                    Signout
+                  </SignOut>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
       </div>
     </nav>
   );

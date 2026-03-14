@@ -4,12 +4,15 @@ import AppPiechart from "@/components/ui/AppPiechart";
 import Cardlist from "@/components/ui/Cardlist";
 import HeroSection from "@/components/ui/Hero";
 import Tasklist from "@/components/ui/Tasklist";
+import { getUser } from "@/lib/require-user";
 
-export default function Home() {
+const Home = async () => {
+  const user = await getUser();
+
   return (
     <div className="flex flex-col gap-4">
       <div className="bg-primary-foreground p-4 rounded-lg">
-        <HeroSection />
+        <HeroSection user={user} />
       </div>
       <div className="bg-primary-foreground p-4 rounded-lg">
         <AppbarChart />
@@ -31,4 +34,6 @@ export default function Home() {
       </div>
     </div>
   );
-}
+};
+
+export default Home;

@@ -96,9 +96,10 @@ export function SignInForm() {
 
     if (error) {
       setError(error.message || "Something went wrong");
+      console.log(error.message);
     } else {
       toast.success("Signed in successfully");
-      router.push(redirect ?? "/dashboard");
+      router.push(redirect ?? "/profile");
     }
   }
 

@@ -1,119 +1,126 @@
-[
-  {
-    "id": 1,
-    "header": "January",
-    "type": "13",
-    "status": "In Process",
-    "target": "18",
-    "limit": "5",
-    "reviewer": "Eddie Lake"
-  },
-  {
-    "id": 2,
-    "header": "February",
-    "type": "14",
-    "status": "Done",
-    "target": "29",
-    "limit": "24",
-    "reviewer": "Eddie Lake"
-  },
-  {
-    "id": 3,
-    "header": "March ",
-    "type": "11",
-    "status": "Done",
-    "target": "10",
-    "limit": "13",
-    "reviewer": "Eddie Lake"
-  },
-  {
-    "id": 4,
-    "header": "April ",
-    "type": "16",
-    "status": "Done",
-    "target": "27",
-    "limit": "23",
-    "reviewer": "Jamik Tashpulatov"
-  },
-  {
-    "id": 5,
-    "header": "May",
-    "type": "10",
-    "status": "In Process",
-    "target": "2",
-    "limit": "16",
-    "reviewer": "Jamik Tashpulatov"
-  },
-  {
-    "id": 6,
-    "header": "June",
-    "type": "19",
-    "status": "In Process",
-    "target": "20",
-    "limit": "8",
-    "reviewer": "Jamik Tashpulatov"
-  },
-  {
-    "id": 7,
-    "header": "July",
-    "type": "15",
-    "status": "In Process",
-    "target": "19",
-    "limit": "21",
-    "reviewer": "Jamik Tashpulatov"
-  },
-  {
-    "id": 8,
-    "header": "August  ",
-    "type": "16",
-    "status": "Done",
-    "target": "25",
-    "limit": "26",
-    "reviewer": "Assign reviewer"
-  },
-  {
-    "id": 9,
-    "header": "September",
-    "type": "09 ",
-    "status": "Done",
-    "target": "7",
-    "limit": "23",
-    "reviewer": "Assign reviewer"
-  },
-  {
-    "id": 10,
-    "header": "October",
-    "type": "16",
-    "status": "Done",
-    "target": "30",
-    "limit": "28",
-    "reviewer": "Assign reviewer"
-  },
-  {
-    "id": 11,
-    "header": "18 ",
-    "type": "Narrative",
-    "status": "Done",
-    "target": "9",
-    "limit": "31",
-    "reviewer": "Assign reviewer"
-  },
-  {
-    "id": 12,
-    "header": "December",
-    "type": "10",
-    "status": "Done",
-    "target": "12",
-    "limit": "0",
-    "reviewer": "Assign reviewer"
-  }
+type DashboardData = {
+  id: number;
+  header: string;
+  type: string;
+  status: string;
+  target: string;
+  limit: string;
+  reviewer: string;
+};
 
-]
+const dashboardData: DashboardData[] = [
+  {
+    id: 1,
+    header: "January",
+    type: "13",
+    status: "In Process",
+    target: "18",
+    limit: "5",
+    reviewer: "Eddie Lake",
+  },
+  {
+    id: 2,
+    header: "February",
+    type: "14",
+    status: "Done",
+    target: "29",
+    limit: "24",
+    reviewer: "Eddie Lake",
+  },
+  {
+    id: 3,
+    header: "March ",
+    type: "11",
+    status: "Done",
+    target: "10",
+    limit: "13",
+    reviewer: "Eddie Lake",
+  },
+  {
+    id: 4,
+    header: "April ",
+    type: "16",
+    status: "Done",
+    target: "27",
+    limit: "23",
+    reviewer: "Jamik Tashpulatov",
+  },
+  {
+    id: 5,
+    header: "May",
+    type: "10",
+    status: "In Process",
+    target: "2",
+    limit: "16",
+    reviewer: "Jamik Tashpulatov",
+  },
+  {
+    id: 6,
+    header: "June",
+    type: "19",
+    status: "In Process",
+    target: "20",
+    limit: "8",
+    reviewer: "Jamik Tashpulatov",
+  },
+  {
+    id: 7,
+    header: "July",
+    type: "15",
+    status: "In Process",
+    target: "19",
+    limit: "21",
+    reviewer: "Jamik Tashpulatov",
+  },
+  {
+    id: 8,
+    header: "August",
+    type: "16",
+    status: "Done",
+    target: "25",
+    limit: "26",
+    reviewer: "Assign reviewer",
+  },
+  {
+    id: 9,
+    header: "September",
+    type: "09",
+    status: "Done",
+    target: "7",
+    limit: "23",
+    reviewer: "Assign reviewer",
+  },
+  {
+    id: 10,
+    header: "October",
+    type: "16",
+    status: "Done",
+    target: "30",
+    limit: "28",
+    reviewer: "Assign reviewer",
+  },
+  {
+    id: 11,
+    header: "18",
+    type: "Narrative",
+    status: "Done",
+    target: "9",
+    limit: "31",
+    reviewer: "Assign reviewer",
+  },
+  {
+    id: 12,
+    header: "December",
+    type: "10",
+    status: "Done",
+    target: "12",
+    limit: "0",
+    reviewer: "Assign reviewer",
+  },
+];
 
-
-
-
-  {/*
+export default dashboardData
+/*{
     "id": 13,
     "header": "Past Performance",
     "type": "Narrative",
@@ -616,4 +623,4 @@
     "target": "26",
     "limit": "29",
     "reviewer": "Assign reviewer"
-  */}
+  }*/
